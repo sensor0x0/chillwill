@@ -201,7 +201,7 @@
                 '<nav class="site-nav" aria-label="Primary">' +
                     '<a href="./index.html" class="nav-link' + (isHome ? ' is-active' : '') + '"' + (isHome ? ' aria-current="page"' : '') + '>' + escapeHtml(data.site.navHome) + '</a>' +
                     '<a href="./index.html#roster" class="nav-link' + (isPlayer ? ' is-active' : '') + '">' + escapeHtml(data.site.navRoster) + '</a>' +
-                    '<a href="./hltv.html" class="nav-link">HLTV</a>' +
+                    '<a href="./hltv/" class="nav-link">HLTV</a>' +
                 '</nav>' +
             '</div>'
         );

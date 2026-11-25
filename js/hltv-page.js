@@ -2,36 +2,36 @@
   'use strict';
 
   var FLAGS = {
-    DE: './hltv-assets/img/DE_yHZx.avif',
-    EE: './hltv-assets/img/EE_yHZx.avif',
-    GB: './hltv-assets/img/GB_yHZx.gif',
-    LT: './hltv-assets/img/LT_yHZx.avif',
-    RU: './hltv-assets/img/RU_yHZx.avif',
-    UA: './hltv-assets/img/UA_yHZx.avif',
-    SE: './hltv-assets/img/SE_yHZx.gif',
-    NO: './hltv-assets/img/NO_yHZx.gif',
-    FR: './hltv-assets/img/FR_yHZx.avif',
-    BR: './hltv-assets/img/BR_yHZx.gif',
-    US: './hltv-assets/img/US_yHZx.gif',
-    PL: './hltv-assets/img/PL_yHZx.avif',
-    PT: './hltv-assets/img/PT_yHZx.gif',
-    RO: './hltv-assets/img/RO_yHZx.avif',
-    RS: './hltv-assets/img/RS_yHZx.gif',
-    NL: './hltv-assets/img/NL_yHZx.avif',
-    CA: './hltv-assets/img/CA_yHZx.gif',
-    WORLD: './hltv-assets/img/WORLD_yHZx.gif'
+    DE: '../hltv-assets/img/DE_yHZx.avif',
+    EE: '../hltv-assets/img/EE_yHZx.avif',
+    GB: '../hltv-assets/img/GB_yHZx.gif',
+    LT: '../hltv-assets/img/LT_yHZx.avif',
+    RU: '../hltv-assets/img/RU_yHZx.avif',
+    UA: '../hltv-assets/img/UA_yHZx.avif',
+    SE: '../hltv-assets/img/SE_yHZx.gif',
+    NO: '../hltv-assets/img/NO_yHZx.gif',
+    FR: '../hltv-assets/img/FR_yHZx.avif',
+    BR: '../hltv-assets/img/BR_yHZx.gif',
+    US: '../hltv-assets/img/US_yHZx.gif',
+    PL: '../hltv-assets/img/PL_yHZx.avif',
+    PT: '../hltv-assets/img/PT_yHZx.gif',
+    RO: '../hltv-assets/img/RO_yHZx.avif',
+    RS: '../hltv-assets/img/RS_yHZx.gif',
+    NL: '../hltv-assets/img/NL_yHZx.avif',
+    CA: '../hltv-assets/img/CA_yHZx.gif',
+    WORLD: '../hltv-assets/img/WORLD_yHZx.gif'
   };
 
   var FORUM_LOGOS = {
-    Vitality: './hltv-assets/img/yeXBldn9w8LZCgdElAenPs_yHZx.avif',
-    Spirit: './hltv-assets/img/ywdn4tmAvXfllLeV2SkkvF_002_yHZx.avif',
-    MOUZ: './hltv-assets/img/IejtXpquZnE8KqYPB1LNKw_yHZx.svg',
-    NAVI: './hltv-assets/img/9iMirAi7ArBLNU8p3kqUTZ_yHZx.svg',
-    Astralis: './hltv-assets/img/9bgXHp-oh1oaXr7F0mTGmd_yHZx.svg',
-    FURIA: './hltv-assets/img/mvNQc4csFGtxXk5guAh8m1_yHZx.svg',
-    HEROIC: './hltv-assets/img/4S22uk_gnZTiQiI-hhH4yp_yHZx.avif',
-    Falcons: './hltv-assets/img/4eJSkDQINNM6Tbs4WvLzkN_yHZx.avif',
-    ChillWill: './images/chill-will-logo.webp'
+    Vitality: '../hltv-assets/img/yeXBldn9w8LZCgdElAenPs_yHZx.avif',
+    Spirit: '../hltv-assets/img/ywdn4tmAvXfllLeV2SkkvF_002_yHZx.avif',
+    MOUZ: '../hltv-assets/img/IejtXpquZnE8KqYPB1LNKw_yHZx.svg',
+    NAVI: '../hltv-assets/img/9iMirAi7ArBLNU8p3kqUTZ_yHZx.svg',
+    Astralis: '../hltv-assets/img/9bgXHp-oh1oaXr7F0mTGmd_yHZx.svg',
+    FURIA: '../hltv-assets/img/mvNQc4csFGtxXk5guAh8m1_yHZx.svg',
+    HEROIC: '../hltv-assets/img/4S22uk_gnZTiQiI-hhH4yp_yHZx.avif',
+    Falcons: '../hltv-assets/img/4eJSkDQINNM6Tbs4WvLzkN_yHZx.avif',
+    ChillWill: '../images/chill-will-logo.webp'
   };
 
   function post(num, author, flag, time, likes, flair, body, replies, banned) {
