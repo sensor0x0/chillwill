@@ -201,6 +201,7 @@
                 '<nav class="site-nav" aria-label="Primary">' +
                     '<a href="./index.html" class="nav-link' + (isHome ? ' is-active' : '') + '"' + (isHome ? ' aria-current="page"' : '') + '>' + escapeHtml(data.site.navHome) + '</a>' +
                     '<a href="./index.html#roster" class="nav-link' + (isPlayer ? ' is-active' : '') + '">' + escapeHtml(data.site.navRoster) + '</a>' +
+                    '<a href="./hltv.html" class="nav-link">HLTV</a>' +
                 '</nav>' +
             '</div>'
         );
@@ -307,6 +308,157 @@
         );
     }
 
+    function formatFaceitElo(elo) {
+        if (typeof elo === 'number' && !isNaN(elo)) {
+            return Math.round(elo).toLocaleString('en-US');
+        }
+        var str = typeof elo === 'string' ? elo.trim() : '';
+        if (!str) {
+            return '—';
+        }
+        if (/^\d+$/.test(str)) {
+            return parseInt(str, 10).toLocaleString('en-US');
+        }
+        return str;
+    }
+
+    function parseRankNumber(val) {
+        if (typeof val === 'number' && !isNaN(val)) {
+            var rounded = Math.round(val);
+            return rounded > 0 ? rounded : null;
+        }
+        var str = typeof val === 'string' ? val.trim().replace(/^#/, '') : '';
+        if (/^\d+$/.test(str)) {
+            var parsed = parseInt(str, 10);
+            return parsed > 0 ? parsed : null;
+        }
+        return null;
+    }
+
+    function formatRankTag(val) {
+        var num = parseRankNumber(val);
+        if (num !== null) {
+            return '#' + num;
+        }
+        var str = typeof val === 'string' ? val.trim() : '';
+        return str;
+    }
+
+    function computeFaceitLevel(elo, thresholds) {
+        var numeric = typeof elo === 'number' ? elo : parseInt(String(elo || '').replace(/[^0-9-]/g, ''), 10);
+        if (isNaN(numeric) || numeric <= 0) {
+            return 0;
+        }
+        var list = Array.isArray(thresholds) && thresholds.length ? thresholds : [
+            { level: 10, minElo: 2001 },
+            { level: 9,  minElo: 1751 },
+            { level: 8,  minElo: 1531 },
+            { level: 7,  minElo: 1351 },
+            { level: 6,  minElo: 1201 },
+            { level: 5,  minElo: 1051 },
+            { level: 4,  minElo: 901 },
+            { level: 3,  minElo: 751 },
+            { level: 2,  minElo: 501 },
+            { level: 1,  minElo: 1 }
+        ];
+        for (var i = 0; i < list.length; i += 1) {
+            if (numeric >= list[i].minElo) {
+                return list[i].level;
+            }
+        }
+        return 0;
+    }
+
+    function renderChallengerBadge(rankText, iconUrl) {
+        return (
+            '<span class="faceit-challenger-pill">' +
+                '<span class="faceit-challenger-rank">' + escapeHtml(rankText) + '</span>' +
+                '<img class="faceit-challenger-icon" src="' + escapeHtml(iconUrl) + '" alt="FACEIT Challenger" width="28" height="28" decoding="async">' +
+            '</span>'
+        );
+    }
+
+    function renderFaceitLevelBadge(level, iconUrl) {
+        return (
+            '<img class="faceit-level-icon" src="' + escapeHtml(iconUrl) + '" alt="' + escapeHtml('FACEIT Level ' + level) + '" width="38" height="38" decoding="async">'
+        );
+    }
+
+    function renderFaceitWidget(member) {
+        var data = getData();
+        var fc = member && member.faceit;
+        if (!fc || !fc.enabled) {
+            return '';
+        }
+
+        var cfg = data.faceitConfig || {};
+        var handle = (typeof fc.username === 'string' && fc.username.trim()) ? fc.username.trim() : data.getDisplayName(member);
+        var season = (typeof fc.season === 'string' && fc.season.trim()) ? fc.season.trim() : (cfg.season || '');
+        var countryRank = formatRankTag(fc.countryRank);
+
+        var iconBase = (cfg.iconBaseUrl || 'https://cdn.jsdelivr.net/gh/Juknum/counter-strike-icons@main/faceit').replace(/\/+$/, '');
+        var challengerMax = typeof cfg.challengerMaxRank === 'number' ? cfg.challengerMaxRank : 1000;
+        var level = computeFaceitLevel(fc.elo, cfg.levelThresholds);
+        var worldRankSource = fc.worldRank !== undefined && fc.worldRank !== null && fc.worldRank !== '' ? fc.worldRank : fc.challengerRank;
+        var worldRankNum = parseRankNumber(worldRankSource);
+        var isChallenger = level >= 10 && worldRankNum !== null && worldRankNum >= 1 && worldRankNum <= challengerMax;
+
+        var badgeHtml = isChallenger
+            ? renderChallengerBadge('#' + worldRankNum, iconBase + '/' + (cfg.challengerIconFile || '11.svg'))
+            : renderFaceitLevelBadge(level, iconBase + '/' + level + '.svg');
+
+        var flagSource = data.getFlagSource(member);
+        var flagUrl = data.getFlagUrl(flagSource);
+        var natLabel = data.getNationalityLabel(member);
+        var codeText = /^[a-z]{2}(-[a-z]{2,3})?$/i.test(flagSource) ? flagSource.toUpperCase() : '--';
+        var flagHtml = flagUrl
+            ? '<img class="cw-flag cw-flag--sm faceit-flag" src="' + escapeHtml(flagUrl) + '" alt="' + escapeHtml((natLabel || codeText) + ' flag') + '" loading="lazy" decoding="async" data-code="' + escapeHtml(codeText) + '">'
+            : '';
+
+        var statsObj = fc.stats || {};
+        var statDefs = [
+            ['K/D', statsObj.kd],
+            ['K/R', statsObj.kr],
+            ['ADR', statsObj.adr],
+            ['AVG', statsObj.avg],
+            ['HS%', statsObj.hs],
+            ['WIN%', statsObj.win]
+        ];
+        var statsHtml = '';
+        for (var j = 0; j < statDefs.length; j += 1) {
+            var statVal = statDefs[j][1] != null && String(statDefs[j][1]).trim() !== '' ? String(statDefs[j][1]).trim() : '—';
+            statsHtml += (
+                '<div class="faceit-stat">' +
+                    '<span class="faceit-stat-label">' + escapeHtml(statDefs[j][0]) + '</span>' +
+                    '<span class="faceit-stat-value">' + escapeHtml(statVal) + '</span>' +
+                '</div>'
+            );
+        }
+
+        return (
+            '<section class="faceit-widget" aria-label="FACEITSync stats">' +
+                '<div class="faceit-top">' +
+                    '<div class="faceit-brand-row">' +
+                        '<span class="faceit-brand"><span class="faceit-brand-accent">FACEIT</span><span class="faceit-brand-sync">Sync</span></span>' +
+                        (season ? '<span class="faceit-season">' + escapeHtml(season) + '</span>' : '') +
+                    '</div>' +
+                    '<div class="faceit-player-row">' +
+                        flagHtml +
+                        (countryRank ? '<span class="faceit-country-rank">' + escapeHtml(countryRank) + '</span>' : '') +
+                        '<span class="faceit-username">' + escapeHtml(handle) + '</span>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="faceit-bottom">' +
+                    '<div class="faceit-elo-group">' +
+                        badgeHtml +
+                        '<span class="faceit-elo">' + escapeHtml(formatFaceitElo(fc.elo)) + '</span>' +
+                    '</div>' +
+                    '<div class="faceit-stats-grid">' + statsHtml + '</div>' +
+                '</div>' +
+            '</section>'
+        );
+    }
+
     function renderPlayerProfile(member, allMembers) {
         var data = getData();
         var displayName = data.getDisplayName(member);
@@ -364,6 +516,7 @@
                                 '<dd>' + renderFlag(member, { showLabel: true, fallbackText: data.site.profilePendingNationality, size: 'md' }) + '</dd>' +
                             '</div>' +
                         '</dl>' +
+                        renderFaceitWidget(member) +
                         '<nav class="profile-pager" aria-label="Teammate navigation">' +
                             '<a href="./player.html?player=' + encodeURIComponent(prevMember.id) + '" class="pager-link">' +
                                 '<span class="pager-dir">&larr; ' + escapeHtml(data.site.previousLabel) + '</span>' +
@@ -414,6 +567,7 @@
         renderFooter: renderFooter,
         renderRosterCard: renderRosterCard,
         renderCoachCard: renderCoachCard,
+        renderFaceitWidget: renderFaceitWidget,
         renderPlayerProfile: renderPlayerProfile,
         renderPlayerNotFound: renderPlayerNotFound
     };

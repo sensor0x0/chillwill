@@ -287,7 +287,7 @@ dd {
     width: 100%;
     aspect-ratio: 4 / 5;
     overflow: hidden;
-    background-color: var(--color-bg);
+    background-color: #263d4f;
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -404,7 +404,7 @@ dd {
     width: 100%;
     aspect-ratio: 4 / 5;
     overflow: hidden;
-    background-color: var(--color-bg);
+    background-color: #263d4f;
     border-right: 1px solid var(--color-border);
 }
 
@@ -587,7 +587,7 @@ dd {
 .profile-media {
     width: 100%;
     aspect-ratio: 4 / 5;
-    background-color: var(--color-surface);
+    background-color: #263d4f;
     border: 1px solid var(--color-border);
     overflow: hidden;
 }
@@ -865,6 +865,181 @@ dd {
     color: var(--color-text-subtle);
 }
 
+/* FACEITSync Profile Widget (Scoped third-party overlay recreation)
+   -------------------------------------------------------------------------- */
+.faceit-widget {
+    margin-top: 1.75rem;
+    width: 100%;
+    max-width: 560px;
+    background-color: #0b0b0c;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    color: #ffffff;
+}
+
+.faceit-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.faceit-brand-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+}
+
+.faceit-brand {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.faceit-brand-accent {
+    color: #ff5500;
+}
+
+.faceit-brand-sync {
+    color: #ffffff;
+}
+
+.faceit-season {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #8a3a12;
+    background-color: #19110d;
+    color: #f3eae4;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+}
+
+.faceit-player-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+}
+
+.faceit-flag {
+    border-radius: 2px;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.faceit-country-rank {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #ffffff;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+.faceit-username {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #f4f4f6;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.faceit-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.faceit-elo-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.faceit-challenger-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background-color: #e80128;
+    border-radius: 999px;
+    padding: 3px 4px 3px 11px;
+    line-height: 1;
+}
+
+.faceit-challenger-rank {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #121212;
+    font-variant-numeric: tabular-nums;
+}
+
+.faceit-challenger-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: block;
+    flex-shrink: 0;
+}
+
+.faceit-level-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: block;
+    flex-shrink: 0;
+}
+
+.faceit-elo {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ff5500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.faceit-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, auto));
+    gap: 11px;
+    text-align: center;
+}
+
+.faceit-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.faceit-stat-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #b8b8c2;
+    line-height: 1;
+}
+
+.faceit-stat-value {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #ffffff;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+}
+
 /* Responsive Breakpoints
    -------------------------------------------------------------------------- */
 @media (max-width: 1099px) {
@@ -906,6 +1081,27 @@ dd {
 
     .spec-row {
         grid-template-columns: 112px minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 599px) {
+    .faceit-top,
+    .faceit-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .faceit-stats-grid {
+        width: 100%;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 8px;
+    }
+}
+
+@media (max-width: 379px) {
+    .faceit-stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
     }
 }
 

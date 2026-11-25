@@ -1,0 +1,446 @@
+/* Additive Chill Will overrides for standalone 1:1 HLTV.org dark-mode team page */
+
+:root,
+.day-theme,
+.night-theme,
+:root.night-theme {
+  --top-logo-image: url('./TopLogoDark2x.png');
+}
+
+body.cols1101 {
+  background-color: #000000 !important;
+  background-image: none !important;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Fix broken /img/static/footer/x-night.svg icon in social & footer */
+.playerProfile .custom-x:before,
+.teamProfile .custom-x:before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E") !important;
+}
+
+/* Logo row: HLTV logo on left + Back to Chill Will pill in column 3 */
+.cw-hltv-logo-link {
+  grid-column: 1;
+  display: inline-flex;
+  align-items: center;
+  height: 60px;
+}
+
+.cw-hltv-logo-img {
+  height: 60px;
+  width: auto;
+  max-width: 173px;
+  object-fit: contain;
+  display: block;
+}
+
+.cw-hltv-logo-img.cw-logo-fallback {
+  height: 46px;
+  width: 46px;
+}
+
+.cw-return-pill {
+  grid-column: 3;
+  justify-self: end;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  background: var(--boxed-background-color, #2d3844);
+  border: 1px solid var(--boxed-border-color, #495867);
+  border-radius: 3px;
+  color: #b8a4d4 !important;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cw-return-pill:hover {
+  background: var(--header-background-color, #364250);
+  color: #ffffff !important;
+}
+
+/* Player header strip: transparent bodyshots seated natively over HLTV gradient */
+.teamProfile .bodyshot-team-bg {
+  height: 168px !important;
+  box-sizing: border-box;
+}
+
+.teamProfile .bodyshot-team.g-grid .col-custom {
+  box-sizing: border-box;
+}
+
+.teamProfile .bodyshot-team .bodyshot-team-img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  object-position: bottom center;
+  top: 8px !important;
+  display: block;
+}
+
+@media (max-width: 500px) {
+  .teamProfile .bodyshot-team-bg {
+    height: 110px !important;
+  }
+  .teamProfile .bodyshot-team .bodyshot-team-img {
+    height: 102px;
+  }
+}
+
+/* Regional rank tag spacing & trophy star clipping fix */
+.teamProfile .regional-rank-region {
+  margin-right: 3px;
+}
+
+.teamProfile .trophySection .trophyHolder .trophyIcon {
+  object-fit: contain;
+}
+
+.teamProfile .trophySection .trophyDescription {
+  overflow: visible;
+}
+
+/* Force crisp 15x15 team icons inside briefing inline match card */
+.matches-v4 .match-team-logo {
+  width: 15px !important;
+  height: 15px !important;
+  max-width: 15px !important;
+  max-height: 15px !important;
+  object-fit: contain;
+}
+
+/* Roster & Coach table transparent cutouts */
+.table-container.coach-table td .playersBox-playernick-image .playerBox-bodyshot,
+.table-container.players-table td .playersBox-playernick-image .playerBox-bodyshot {
+  width: 56px !important;
+  height: 52px !important;
+  left: 0 !important;
+  top: 0 !important;
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+/* Circular Chill Will logo crop matching main site */
+.cw-team-logo {
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: 52% 28% !important;
+}
+
+.profile-team-logo-container .cw-team-logo {
+  width: 50px;
+  height: 50px;
+}
+
+.team-logo-container .cw-team-logo,
+.match-team-logo-container .cw-team-logo {
+  width: 15px;
+  height: 15px;
+}
+
+.highlighted-team-logo-container .cw-team-logo {
+  width: 32px;
+  height: 32px;
+}
+
+/* Sortable roster headers */
+.cw-sort-th {
+  cursor: pointer;
+  user-select: none;
+}
+
+.cw-sort-th:hover {
+  color: var(--highlight-text, #88aace) !important;
+}
+
+/* AI Briefing clean non-animated render + collapse toggle */
+.brainbriefing-word {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+.brainbriefing.cw-collapsed .brainbriefing-body {
+  display: none !important;
+}
+
+.brainbriefing-toggle i {
+  transition: transform 0.15s ease;
+}
+
+.brainbriefing.cw-collapsed .brainbriefing-toggle i {
+  transform: rotate(180deg);
+}
+
+/* World ranking chart container + hover tooltip */
+.cw-chart-wrap {
+  position: relative;
+  width: 100%;
+  height: 280px;
+}
+
+.cw-chart-wrap canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cw-chart-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: #1b1f23;
+  border: 1px solid #495867;
+  border-radius: 3px;
+  padding: 6px 9px;
+  font-size: 11px;
+  color: #efefef;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.55);
+  z-index: 20;
+  white-space: nowrap;
+  display: none;
+}
+
+/* Native HLTV forum thread view rendered in-place inside .contentCol */
+.cw-forum-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: var(--text-color, #929a9e);
+}
+
+.cw-forum-crumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-width: 0;
+}
+
+.cw-forum-crumb-link {
+  color: var(--a-color, #87a3bf);
+  text-decoration: none;
+}
+
+.cw-forum-crumb-link:hover {
+  text-decoration: underline;
+}
+
+.cw-crumb-sep {
+  color: var(--text-color-faded);
+}
+
+.cw-crumb-current {
+  color: var(--night-text, #b9bdbf);
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cw-forum-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.cw-forum-actions .forum-action-button {
+  float: none !important;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border: 1px solid var(--boxed-border-color, #495867);
+  background: var(--header-background-color, #364250);
+  color: var(--a-color, #87a3bf);
+  font-size: 11px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.cw-forum-actions .forum-action-button:hover {
+  background: var(--hover, #45515f);
+  color: #fff;
+}
+
+.forumthread .fan-con,
+.forum .fan-con {
+  flex: 0 1 auto !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: rgba(var(--text-color-rgb), 0.75);
+  font-size: 12px;
+}
+
+.cw-author-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.cw-author-pipe {
+  color: rgba(var(--text-color-rgb), 0.45);
+  margin: 0 1px;
+}
+
+.forumthread .forum-topbar .flag,
+.forum .forum-topbar .flag {
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.forumthread .author,
+.forum .post .forum-topbar .author {
+  font-weight: 700;
+  color: var(--highlight-text, #88aace);
+  margin-left: 0;
+  text-decoration: none;
+}
+
+.forumthread .author:hover,
+.forum .post .forum-topbar .author:hover {
+  text-decoration: underline;
+}
+
+.forumthread .author.bannedUser,
+.forum .post .forum-topbar .author.bannedUser {
+  color: var(--forum-banned-color, #fc1d1d);
+  text-decoration: line-through;
+}
+
+.forum .post.standard-box {
+  margin-bottom: 10px;
+}
+
+.forum .post .forum-topbar .replyNum {
+  color: var(--text-color, #929a9e);
+  font-weight: 700;
+}
+
+.forum-bottombar .time {
+  color: var(--boxed-faded-color, rgba(146, 154, 158, 0.75));
+  flex: 1 1 auto;
+  margin-left: 9px;
+  font-size: 11px;
+}
+
+.forum-bottombar .plus-button {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.forum-bottombar .reply-button {
+  font-size: 11px;
+}
+
+.forum .post.cw-folded .forum-middle,
+.forum .post.cw-folded .forum-bottombar {
+  display: none;
+}
+
+.cw-forum-reply-box {
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.cw-forum-reply-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--header-text, #efefef);
+  margin-bottom: 6px;
+}
+
+.cw-forum-reply-textarea {
+  width: 100%;
+  min-height: 68px;
+  box-sizing: border-box;
+  background: var(--text-area-background, #2d3844);
+  border: 1px solid var(--boxed-border-color, #495867);
+  color: var(--night-text, #b9bdbf);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 8px;
+  resize: vertical;
+}
+
+.cw-forum-reply-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.cw-forum-post-btn {
+  background: var(--button-background-color, #435971);
+  border: 1px solid var(--boxed-border-color, #495867);
+  color: #fff;
+  padding: 4px 11px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cw-forum-post-btn:hover {
+  background: var(--button-background-color-hover, #59728e);
+}
+
+.cw-forum-cancel-btn {
+  background: transparent;
+  border: 1px solid var(--boxed-border-color, #495867);
+  color: var(--text-color, #929a9e);
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.right2Col .activitylist a.cw-thread-active {
+  background-color: var(--hover, #45515f) !important;
+  color: #fff !important;
+}
+
+/* HLTV-accurate flag + name hover: underline text only, never flag or gap */
+.brainbriefing-mention:hover {
+  text-decoration: none !important;
+}
+
+.brainbriefing-mention:hover .brainbriefing-word {
+  text-decoration: underline !important;
+}
+
+.brainbriefing-mention .brainbriefing-flag,
+.brainbriefing-mention .brainbriefing-logo {
+  margin-right: 4px;
+}
+
+.teamProfile .bodyshot-team .playerFlagName .flag,
+.teamProfile .profile-team-stat .flag {
+  margin-right: 4px;
+}
+
+.teamProfile .bodyshot-team a.col-custom:hover {
+  text-decoration: none !important;
+}
+
+.teamProfile .bodyshot-team a.col-custom:hover .nickname-container .bold {
+  text-decoration: underline;
+}
+
+.teamProfile .profile-team-stat a.a-reset:hover {
+  text-decoration: none !important;
+}
+
+.teamProfile .profile-team-stat a.a-reset:hover .a-default {
+  text-decoration: underline;
+}
+
+
