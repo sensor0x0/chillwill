@@ -1,1 +1,54 @@
-<h1>chillwill.lol</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chill Will</title>
+    <link rel="icon" type="image/webp" href="./images/chill-will-logo.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body data-page="home">
+    <header id="site-header" class="site-header"></header>
+
+    <main>
+        <section class="hero" aria-label="Team Introduction">
+            <div class="container hero-inner">
+                <span class="cw-logo cw-logo--hero">
+                    <img id="hero-logo-img" src="./images/chill-will-logo.webp" alt="Chill Will logo" class="cw-logo-img">
+                </span>
+                <div class="hero-copy">
+                    <h1 id="hero-title" class="hero-title">Chill Will</h1>
+                    <div class="hero-rule" aria-hidden="true"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roster" class="roster-section" aria-labelledby="roster-heading">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="roster-heading" class="section-title">Roster</h2>
+                </div>
+                <div id="roster-grid" class="roster-grid"></div>
+            </div>
+        </section>
+
+        <section id="coach" class="coach-section" aria-labelledby="coach-heading">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="coach-heading" class="section-title">Coach</h2>
+                </div>
+                <div id="coach-container"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="site-footer" class="site-footer"></footer>
+
+    <script defer src="./js/players.js"></script>
+    <script defer src="./js/components.js"></script>
+    <script defer src="./js/app.js"></script>
+</body>
+</html>
